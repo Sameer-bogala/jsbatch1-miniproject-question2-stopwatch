@@ -1,0 +1,163 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>js stopwatchproject</title><style>
+
+    html {
+        height: 100%;
+        font-family: "roboto condensed",sans-serif;
+    }
+
+    body {
+        height: 100%;
+        justify-content: center;
+        align-items: center;
+        background-color: orange;
+    }
+       .li {
+            color: red;
+        }
+
+    #display {
+        margin: 0;
+        background-color: sienna;
+        text-align: center;
+        color: orangered;
+        font-size: 64px;
+        border-radius: 5px;
+        padding: 10px;
+        cursor: default;
+        user-select: none
+    }
+
+    .container {
+        box-shadow: 0 1px 4px rgba(0,0, 0, 0.5);
+        margin: 100px;
+        margin-left: 200px;
+        justify-content: center;
+        padding: 15px;
+        align-items: center;
+        border-radius: 5px;
+        background-color: silver;
+        width: 50%;
+    }
+
+    .buttons {
+        display: flex;
+        margin: 10px;
+    }
+
+    
+    .h1{
+        color:blue;
+    }
+    
+
+    .buttons button {
+        flex: 1;
+        margin: 0 5px;
+        border: none;
+        font-size: 20px;
+        padding: 5px;
+        border-radius: 5px;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+        font-weight: bold;
+        color: blue;
+        background-color: yellow;
+        outline: none;
+        cursor: pointer;
+    }
+
+        .buttons button:hover {
+            color: aqua;
+            background-color: blueviolet;
+        }
+</style>
+    <script>
+    let seconds = 0;
+    let minutes = 0;
+        let hours = 0;
+        let displaySeconds = 0;
+        let displayMinutes = 0;
+        let displayHours = 0;
+        let interval = null;
+        let status = "stopped";
+    function stopWatch() {
+        seconds++;
+        if (seconds / 60 === 1) {
+            seconds = 0;
+            minutes++;
+            if (minutes / 60 === 1) {
+                minutes = 0;
+                hours++;
+            }
+
+
+        }
+        if (seconds < 10) {
+            displaySeconds = "0" + seconds.toString();
+        }
+        else {
+            displaySeconds = seconds;
+        } if (minutes < 10) {
+            displayMinutes = "0" + minutes.toString();
+        }
+        else {
+            displayMinutes = minutes;
+        }
+        if (hours < 10) {
+            displayHours = "0" + hours.toString();
+        }
+        else {
+            displayHours = hours;
+        }
+        document.getElementById("display").innerHTML = displayHours + ":" + displayMinutes + ":" + displaySeconds;
+    }
+       // window.setInterval(stopWatch, 1000);
+        function startStop() {
+            if (status === "stopped") {
+                interval = window.setInterval(stopWatch, 1000);
+                document.getElementById("startStop").innerHTML = "Stop";
+                status = "started";
+            }
+            else {
+                window.clearInterval(interval);
+                document.getElementById("startStop").innerHTML = "Start";
+                status = "stopped";
+            }
+        }
+        function Stop() {
+            window.clearInterval(interval);
+            document.getElementById("startStop").innerHTML = "Start";
+            status = "stopped";
+
+        }
+            function reset() {
+                window.clearInterval(interval);
+                seconds = 0;
+                minutes = 0;
+                hours = 0;
+                document.getElementById("display").innerHTML = "00:00:00";
+                document.getElementById("startStop").innerHTML = "start";
+
+            }
+        
+</script>
+</head>
+<body><h1 class="h1">stop watch for seconds,minutes&hours(1000 milliseconds=1sec)</h1>
+    <h2 class="li">email:sameerbogala378@gmail.com</h2><li>Question 2</li>
+    <div class="container">
+      <div id="display">
+            00:00:00
+        </div>
+        <div class="buttons">
+            <button id="startStop" onclick="startStop()">START</button>
+            <button id="Stop" onclick="Stop()">STOP</button>
+            <button id="reset"  onclick="reset()">RESET</button>
+        </div>
+    </div>
+    
+</body>
+</html>
